@@ -47,7 +47,7 @@ class Umpare{
 		System.out.print("Guesser kindly guess the number : ");
 		int temp = g.guessNumber();
 		if(temp<start || temp>end) {
-			System.out.print("Guesser kindly guess the number between "+start+" --  "+end+" : ");
+			System.out.print("Hey Guesser kindly guess the number between "+start+" --  "+end+" : ");
 			temp = g.guessNumber();
 			if(temp<start || temp>end) {
 				System.out.println("INVALIDE VALUE");
@@ -68,11 +68,24 @@ class Umpare{
 			System.out.print("Player "+ (i+1) +" kindly guess the number : ");
 			int temp = p.guessNumber();
 			if(temp<start || temp>end) {
-				System.out.print("Player "+ (i+1) +" kindly guess the number between "+start+" -- "+end+" : ");
+				System.out.println("WARNING 1 Player "+ (i+1) +" kindly guess the number between "+start+" -- "+end+" ");
+				System.out.print("Are Else you are Terminate from this Game : ");
 				temp = p.guessNumber();
-				numFromPlayer[i] = temp;
-				if(temp<start || temp>end)
-					i--;
+				if(temp>=start && temp<=end)
+				{
+					numFromPlayer[i] = temp;
+				}
+				else
+				{
+					System.out.println("Due To INVALIDE VALUE Player "+ (i+1) +" You Are Terminated");
+					int t = --noOfPlayers;
+					System.out.println("Sorry... Match is Restarted");
+					System.out.println("Only "+t+" in this Match");
+					collectNumFromGuesser();
+					collectNumFromPlayer();
+					break;
+				}
+					
 			}
 			else
 				numFromPlayer[i] = temp;	
@@ -86,7 +99,7 @@ class Umpare{
 		int count = 0;
 		for(int i=0;i<noOfPlayers;i++) {
 			if(numFromGuesser == numFromPlayer[i]) {
-				System.out.println("Player "+ (i+1) +" win the match");
+				System.out.println("***** Player "+ (i+1) +" your guess is correct *****");
 				count++;
 			}
 		}
@@ -99,7 +112,9 @@ class Umpare{
 			compare();
 		}
 		else if(count == 0)
-			System.out.println("Match Draw");
+			System.out.println("Match Draw All of Your number not Match to Gusser number");
+		else
+			System.out.println("Match Sussfully Finished");
 	
 	}
 		
